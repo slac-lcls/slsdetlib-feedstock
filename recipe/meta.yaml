@@ -1,0 +1,50 @@
+{% set name = "slsdetlib" %}
+{% set version = "8.0.2" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+
+source:
+  url: file:///sdf/group/lcls/ds/ana/sw/source_files/{{ name }}-{{ version }}.tar.gz
+  sha256: ea688c39d23a3ae8db50b84e79cdf5452f95ac0c1ce703804cbc169d8b38b713
+
+build:
+  skip: True  # [win or osx]
+  number: 5
+  binary_relocation: True
+  rpaths:
+    - lib/
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{compiler('cxx')}}
+    - cmake
+    - expat
+
+  host:
+          #- libstdcxx-ng
+          #- libgcc-ng
+    - expat
+
+  run:
+          #- libstdcxx-ng
+          #- libgcc-ng 
+
+about:
+  home: https://github.com/slsdetectorgroup/slsDetectorPackage
+  license: LGPL
+  license_family: LGPL
+  license_file: LICENSES/LGPL-3.0
+  summary: 'SLS Detector Package'
+  description: |
+    Package for SLS detectors
+  doc_url: https://github.com/slsdetectorgroup/slsDetectorPackage
+  dev_url: https://github.com/slsdetectorgroup/slsDetectorPackage
+
+extra:
+  recipe-maintainers:
+    - valmar
+    - chrisvam
